@@ -22,30 +22,31 @@ class ListItem extends React.Component {
   }
   
   handleEditDisplay() {
-    var toggleDisplay = this.state.toggleDisplay;
-    if (toggleDisplay = true) {
       this.setState({
-        toggleDisplay: false
+        toggleDisplay: !this.state.toggleDisplay
       });
-    } else {
-      this.setState({
-        toggleDisplay: true
-      });
-    }
     console.log(this.state.toggleDisplay);
   };
+
+  // handleShowEditForm() {
+  //   if (this.state.toggleDisplay === false) {
+  //     this.setState({
+
+  //     })
+  //   }
+  // }
   
   render() {
     return(
       <div>
         <button 
-        className='list-group-item-success'
+        className='list-group-item-success btn-block'
         value={this.state.toggleDisplay}
         onClick={() => this.handleEditDisplay()}
 
-        >{this.props.createTodoText}</button>
+        >{this.state.toggleDisplay ? 
 
-        <div className="col-md-4">
+          <div >
           <div className="card">
             <div className="card-body">
               <h5 className="card-title">Add New Todo</h5>
@@ -91,7 +92,12 @@ class ListItem extends React.Component {
 
             </div>
           </div>
-        </div>
+        </div> : null
+          
+          
+          }</button>
+
+
 
       </div>
     )

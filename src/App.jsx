@@ -17,13 +17,14 @@ class App extends Component {
     let newTodo = {
       createTodoText: createTodoText,
       createTodoPriority: createTodoPriority,
-      id: id
+      id: id,
+
     };
-    id++;
     this.state.createTodoItems.push(newTodo);
     this.setState({ createTodoItems: this.state.createTodoItems});
     console.log(this.state.createTodoItems);
   }
+  
   render() {
     return (
       <div className='container'>

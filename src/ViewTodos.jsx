@@ -16,7 +16,11 @@ const ViewTodos = props => {
             { 
               props.createTodoItems.map( newTodo => {
                 return (
-                  <ListItem key={newTodo.id} createTodoText={newTodo.createTodoText} createTodoPriority={newTodo.createTodoPriority}/>
+                  <ListItem 
+                  key={newTodo.id} 
+                  createTodoText={newTodo.createTodoText} 
+                  createTodoPriority={newTodo.createTodoPriority}
+                  />
                 )
               })
             }
