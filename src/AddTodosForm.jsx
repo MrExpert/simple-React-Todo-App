@@ -5,7 +5,7 @@ class AddTodosForm extends React.Component {
     super(props);
     this.state = {
       createTodoText: "",
-      createTodoPriority: ""
+      createTodoPriority: "",
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -28,7 +28,9 @@ class AddTodosForm extends React.Component {
             <h5 className="card-title">Add New Todo</h5>
 
             <div className="form-group">
-              <label htmlFor="create-todo-text">I want to...</label>
+              <label htmlFor="create-todo-text">
+                I want to...
+              </label>
               <textarea
                 className="create-todo-text form-control"
                 name="createTodoText"
@@ -60,7 +62,10 @@ class AddTodosForm extends React.Component {
               name="button"
               type="submit"
               onClick={ () =>
-                this.props.handleAdd(this.state.createTodoText, this.state.createTodoPriority)
+                this.props.handleAdd(
+                  this.state.createTodoText, 
+                  this.state.createTodoPriority
+                )
               }
             >
               Add!

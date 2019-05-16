@@ -25,79 +25,79 @@ class ListItem extends React.Component {
       this.setState({
         toggleDisplay: !this.state.toggleDisplay
       });
-    console.log(this.state.toggleDisplay);
   };
 
-  // handleShowEditForm() {
-  //   if (this.state.toggleDisplay === false) {
-  //     this.setState({
 
-  //     })
-  //   }
-  // }
   
   render() {
     return(
       <div>
-        <button 
-        className='list-group-item-success btn-block'
-        value={this.state.toggleDisplay}
-        onClick={() => this.handleEditDisplay()}
+        <button
+          className='list-group-item-success btn-block text-left'
+          value={this.state.toggleDisplay}
+          onClick={() => this.handleEditDisplay()}
+        >
+          {this.props.createTodoText}
+        </button>
 
-        >{this.state.toggleDisplay ? 
+        {this.state.toggleDisplay ?
 
-          <div >
-          <div className="card">
-            <div className="card-body">
-              <h5 className="card-title">Add New Todo</h5>
+          <div className='alert-success clearfix'>
 
-              <div className="form-group">
-                <label htmlFor="create-todo-text">I want to...</label>
-                <textarea
-                  className="create-todo-text form-control"
-                  name="createTodoText"
-                  type="string"
-                  value={this.state.createTodoText}
-                  onChange={this.handleChange}
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="create-todo-priority">
-                  How much of a priority is this?
+            <div className="form-group col-md-10">
+              <label htmlFor="create-todo-text">
+                Description
               </label>
-                <select
-                  className="create-todo-priority form-control"
-                  name="createTodoPriority"
-                  value={this.state.createTodoPriority}
-                  onChange={this.handleChange}
-                >
-                  <option>Select a priority</option>
-                  <option value="1">Low priority</option>
-                  <option value="2">Medium priority</option>
-                  <option value="3">High priority</option>
-                </select>
-              </div>
+              <textarea
+                className="create-todo-text form-control"
+                name="createTodoText"
+                type="string"
+                value={this.state.createTodoText}
+                onChange={this.handleChange}
+              />
+            </div>
 
-              <button
-                className="button create-todo btn btn-success btn-block"
-                name="button"
-                type="submit"
-                onClick={() =>
-                  this.props.handleAdd(this.state.createTodoText, this.state.createTodoPriority)
-                }
+            <div className="form-group col-md-10">
+              <label htmlFor="create-todo-priority">
+                How much of a priority is this?
+                </label>
+              <select
+                className="create-todo-priority form-control"
+                name="createTodoPriority"
+                value={this.state.createTodoPriority}
+                onChange={this.handleChange}
               >
-                Add!
+                <option>Select a priority</option>
+                <option value="1">Low priority</option>
+                <option value="2">Medium priority</option>
+                <option value="3">High priority</option>
+              </select>
+            </div>
+
+            <button
+              className="update-todo btn btn-success pull-right"
+              style={{
+                marginRight: 20,
+                marginBottom: 10
+              }}
+              name="button"
+              type="submit"
+              onClick={() =>
+                this.props.handleSave(
+                  this.state.createTodoText,
+                  this.state.createTodoPriority,
+                  this.props.id,
+                  this.toggleDisplay
+                )
+              }
+            >
+              Save!
             </button>
 
-            </div>
           </div>
-        </div> : null
-          
-          
-          }</button>
 
-
+          : null
+        }
 
       </div>
     )

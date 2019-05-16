@@ -8,18 +8,26 @@ const ViewTodos = props => {
         <div className='card' >
           <ul className='list-group'>View Todos
             <li className='list-group-item-success'>
-              Such Wow</li>
+              Such Wow
+            </li>
             <li className='list-group-item-danger'>
-              this is also a thing</li>
+              this is also a thing
+            </li>
             <li className='list-group-item-warning'>
-              All the Things</li>
+              All the Things
+            </li>
             { 
               props.createTodoItems.map( newTodo => {
                 return (
+                  
                   <ListItem 
                   key={newTodo.id} 
+                  id={newTodo.id}
                   createTodoText={newTodo.createTodoText} 
                   createTodoPriority={newTodo.createTodoPriority}
+                  completedTodo={newTodo.completedTodo}
+                  handleSave={props.handleSave}
+                  handleDelete={props.handleDelete}
                   />
                 )
               })
