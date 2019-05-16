@@ -26,8 +26,6 @@ class ListItem extends React.Component {
         toggleDisplay: !this.state.toggleDisplay
       });
   };
-
-
   
   render() {
     return(

@@ -27,7 +27,6 @@ class App extends Component {
     this.setState({ 
       createTodoItems: this.state.createTodoItems
     });
-    // console.log(this.state.createTodoItems);
   }
 
   handleSave(createTodoText, createTodoPriority, id) {
