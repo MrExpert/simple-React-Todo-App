@@ -7,15 +7,6 @@ const ViewTodos = props => {
       <div className='col-md-8'>
         <div className='card' >
           <ul className='list-group'>View Todos
-            <li className='list-group-item-success'>
-              Such Wow
-            </li>
-            <li className='list-group-item-danger'>
-              this is also a thing
-            </li>
-            <li className='list-group-item-warning'>
-              All the Things
-            </li>
             { 
               props.createTodoItems.map( newTodo => {
                 return (

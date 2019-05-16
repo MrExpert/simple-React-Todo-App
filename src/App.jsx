@@ -11,6 +11,7 @@ class App extends Component {
     };
     this.handleAdd = this.handleAdd.bind(this);
     this.handleSave = this.handleSave.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   handleAdd(createTodoText, createTodoPriority) {
@@ -30,20 +31,20 @@ class App extends Component {
   }
 
   handleSave(createTodoText, createTodoPriority, id) {
-    let copy = this.state.createTodoItems;
-    for (let i = 0; i < copy.length; i++) {
-      if (copy[i].id == id) {
-        copy[i].createTodoText = createTodoText;
-        copy[i].createTodoPriority = createTodoPriority;
-        copy[i].toggleDisplay = false;
+    let copyTodos = this.state.createTodoItems;
+    for (let i = 0; i < copyTodos.length; i++) {
+      if (copyTodos[i].id == id) {
+        copyTodos[i].createTodoText = createTodoText;
+        copyTodos[i].createTodoPriority = createTodoPriority;
+        copyTodos[i].toggleDisplay = false;
       }
     }
-    this.setState({ createTodoitems: copy });
+    this.setState({ createTodoitems: copyTodos });
     console.log(this.state.createTodoItems);
   }
 
   handleDelete(id) {
-    const remainingTodos = this.state.createTodoItems.filter((deleteTodo) => {
+    let remainingTodos = this.state.createTodoItems.filter((deletedTodo) => {
       if (deletedTodo.id !== id) return deletedTodo;
     });
     this.setState({ 

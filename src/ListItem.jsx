@@ -32,13 +32,26 @@ class ListItem extends React.Component {
   render() {
     return(
       <div>
-        <button
-          className='list-group-item-success btn-block text-left'
-          value={this.state.toggleDisplay}
-          onClick={() => this.handleEditDisplay()}
+        <div 
+          className='list-group-item-success clearfix'
         >
           {this.props.createTodoText}
-        </button>
+          <button
+            className="list-group-item-danger pull-right"
+            onClick={() => this.props.handleDelete(this.props.id)}
+            >
+            <span className="glyphicon glyphicon-trash"/>
+          </button>
+
+          <button
+            className="list-group-item-success pull-right"
+            value={this.state.toggleDisplay}
+            onClick={() => this.handleEditDisplay()}
+          >
+            <span className="glyphicon glyphicon-edit"/>
+          </button>
+
+        </div>
 
         {this.state.toggleDisplay ?
 
@@ -97,7 +110,9 @@ class ListItem extends React.Component {
           </div>
 
           : null
+            
         }
+        
 
       </div>
     )
