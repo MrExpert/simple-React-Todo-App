@@ -12,9 +12,9 @@ function handlePriorityColor(createTodoPriority) {
 
 function handleCompletedTodo(completedTodo) {
   if (completedTodo === true) {
-    return 'line-through';
+    return "line-through";
   } else {
-    return '';
+    return "";
   }
 }
 
@@ -39,17 +39,17 @@ class ListItem extends React.Component {
       this.setState({ createTodoPriority: e.target.value });
     }
   }
-  
+
   handleEditDisplay() {
     this.props.handleSave(
       this.state.createTodoText,
       this.state.createTodoPriority,
-      this.props.id,
+      this.props.id
     );
     this.setState({
       toggleDisplay: !this.state.toggleDisplay
     });
-  };
+  }
 
   handleCrossedOut() {
     this.setState({
@@ -58,46 +58,60 @@ class ListItem extends React.Component {
   }
 
   render() {
-    return(
+    return (
       <div>
-        <div 
-          className={`list-group-item-${handlePriorityColor(this.state.createTodoPriority)} clearfix`}
+        <li
+          className={`list-group-item-${handlePriorityColor(
+            this.state.createTodoPriority
+          )} clearfix`}
         >
-          <input 
-            type='checkbox'
+          <input
+            type="checkbox"
             style={{
               marginleft: 10
             }}
             value={this.state.completedTodo}
-            onChange={ () => this.handleCrossedOut()}
+            onChange={() => this.handleCrossedOut()}
           />
-            <span style={{textDecoration: `${handleCompletedTodo(this.state.completedTodo)}`}}>{this.props.createTodoText}</span>
-            <button
-              className="list-group-item-danger pull-right"
-              onClick={() => this.props.handleDelete(this.props.id)}
-              >
-              <span className="glyphicon glyphicon-trash"/>
-            </button>
+          <span
+            style={{
+              textDecoration: `${handleCompletedTodo(this.state.completedTodo)}`
+            }}
+          >
+            {this.props.createTodoText}
+          </span>
+          <a
+            className="delete-todo list-group-item-danger pull-right"
+            style={{
+              marginRight: 10
+            }}
+            onClick={() => this.props.handleDelete(this.props.id)}
+          >
+            <span className="glyphicon glyphicon-trash" />
+          </a>
 
-            <button
-              className="list-group-item-success pull-right"
-              value={this.state.toggleDisplay}
-              onClick={() => this.handleEditDisplay()}
-            >
-              <span className="glyphicon glyphicon-edit"/>
-            </button>
-        </div>
+          <a
+            className="edit-todo list-group-item-success pull-right"
+            style={{
+              marginRight: 10
+            }}
+            value={this.state.toggleDisplay}
+            onClick={() => this.handleEditDisplay()}
+          >
+            <span className="glyphicon glyphicon-edit" />
+          </a>
+        </li>
 
-        {this.state.toggleDisplay  ?
-
-          <div className={`alert-${handlePriorityColor(this.state.createTodoPriority)} clearfix`}>
-
+        {this.state.toggleDisplay ? (
+          <div
+            className={`alert-${handlePriorityColor(
+              this.state.createTodoPriority
+            )} clearfix`}
+          >
             <div className="form-group col-md-10">
-              <label htmlFor="create-todo-text">
-                Description
-              </label>
+              <label htmlFor="update-todo-text">Description</label>
               <textarea
-                className="create-todo-text form-control"
+                className="update-todo-text form-control"
                 name="createTodoText"
                 type="string"
                 value={this.state.createTodoText}
@@ -106,11 +120,11 @@ class ListItem extends React.Component {
             </div>
 
             <div className="form-group col-md-10">
-              <label htmlFor="create-todo-priority">
+              <label htmlFor="update-todo-priority">
                 How much of a priority is this?
-                </label>
+              </label>
               <select
-                className="create-todo-priority form-control"
+                className="update-todo-priority form-control"
                 name="createTodoPriority"
                 value={this.state.createTodoPriority}
                 onChange={this.handleChange}
@@ -122,7 +136,6 @@ class ListItem extends React.Component {
               </select>
             </div>
 
-            
             <button
               className="update-todo btn btn-success pull-right pull-bottom"
               style={{
@@ -135,18 +148,10 @@ class ListItem extends React.Component {
             >
               Save!
             </button>
-
           </div>
-
-          : null
-          
-        }
-            
-        
-        
-
+        ) : null}
       </div>
-    )
+    );
   }
 }
 

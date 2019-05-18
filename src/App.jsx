@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import AddTodosForm from './AddTodosForm';
-import ViewTodos from './ViewTodos';
+import React, { Component } from "react";
+import AddTodosForm from "./AddTodosForm";
+import ViewTodos from "./ViewTodos";
 let id = 0;
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      createTodoItems: [],
+      createTodoItems: []
     };
     this.handleAdd = this.handleAdd.bind(this);
     this.handleSave = this.handleSave.bind(this);
@@ -18,11 +18,11 @@ class App extends Component {
     let newTodo = {
       createTodoText: createTodoText,
       createTodoPriority: createTodoPriority,
-      id: id,
+      id: id
     };
     id++;
     this.state.createTodoItems.push(newTodo);
-    this.setState({ 
+    this.setState({
       createTodoItems: this.state.createTodoItems
     });
   }
@@ -39,17 +39,17 @@ class App extends Component {
   }
 
   handleDelete(id) {
-    let remainingTodos = this.state.createTodoItems.filter((deletedTodo) => {
+    let remainingTodos = this.state.createTodoItems.filter(deletedTodo => {
       if (deletedTodo.id !== id) return deletedTodo;
     });
-    this.setState({ 
-      createTodoItems: remainingTodos 
+    this.setState({
+      createTodoItems: remainingTodos
     });
   }
 
   render() {
     return (
-      <div className='container'>
+      <div className="container">
         <div>
           <header>
             <h1>Very Simple Todo App</h1>
@@ -57,17 +57,21 @@ class App extends Component {
           <tagline>Tracks all the things!!!</tagline>
         </div>
 
-        <div className='row'>
-          <AddTodosForm 
-          handleAdd={this.handleAdd}
+        <div className="row">
+          <AddTodosForm handleAdd={this.handleAdd} />
+          <ViewTodos
+            createTodoItems={this.state.createTodoItems}
+            createTodoText={this.state.createTodoText}
+            createTodoPriority={this.state.createTodoPriority}
+            completedTodo={this.state.completedTodo}
+            toggleDisplay={this.state.toggleDisplay}
+            handleSave={this.handleSave}
+            handleDelete={this.handleDelete}
+            handleEditDisplay={this.handleEditDisplay}
+            handleCrossedOut={this.handleCrossedOut}
           />
-          <ViewTodos 
-          createTodoItems={this.state.createTodoItems}
-          handleSave={this.handleSave}
-          handleDelete={this.handleDelete}
-          />
-        </div >
-      </div >
+        </div>
+      </div>
     );
   }
 }
