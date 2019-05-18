@@ -16,7 +16,6 @@ const ViewTodos = props => {
                   id={newTodo.id}
                   createTodoText={newTodo.createTodoText} 
                   createTodoPriority={newTodo.createTodoPriority}
-                  completedTodo={newTodo.completedTodo}
                   handleSave={props.handleSave}
                   handleDelete={props.handleDelete}
                   />

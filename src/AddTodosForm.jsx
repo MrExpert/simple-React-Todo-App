@@ -58,7 +58,7 @@ class AddTodosForm extends React.Component {
             </div>
 
             <button
-              className="button create-todo btn btn-success btn-block"
+              className="create-todo btn btn-success btn-block"
               name="button"
               type="submit"
               onClick={ () =>

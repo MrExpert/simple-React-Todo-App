@@ -19,8 +19,6 @@ class App extends Component {
       createTodoText: createTodoText,
       createTodoPriority: createTodoPriority,
       id: id,
-      completedTodo: false,
-      toggleDisplay: !this.state.toggleDisplay
     };
     id++;
     this.state.createTodoItems.push(newTodo);
@@ -35,11 +33,9 @@ class App extends Component {
       if (copyTodos[i].id == id) {
         copyTodos[i].createTodoText = createTodoText;
         copyTodos[i].createTodoPriority = createTodoPriority;
-        copyTodos[i].toggleDisplay = false;
       }
     }
     this.setState({ createTodoitems: copyTodos });
-    console.log(this.state.createTodoItems);
   }
 
   handleDelete(id) {
@@ -69,8 +65,6 @@ class App extends Component {
           createTodoItems={this.state.createTodoItems}
           handleSave={this.handleSave}
           handleDelete={this.handleDelete}
-
-          // toggleCrossout={this.}
           />
         </div >
       </div >

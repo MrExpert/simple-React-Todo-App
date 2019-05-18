@@ -1,5 +1,22 @@
 import React from "react";
 
+function handlePriorityColor(createTodoPriority) {
+  if (createTodoPriority == 1) {
+    return "success";
+  } else if (createTodoPriority == 2) {
+    return "warning";
+  } else if (createTodoPriority == 3) {
+    return "danger";
+  }
+}
+
+function handleCompletedTodo(completedTodo) {
+  if (completedTodo === true) {
+    return 'line-through';
+  } else {
+    return '';
+  }
+}
 
 class ListItem extends React.Component {
   constructor(props) {
@@ -7,12 +24,14 @@ class ListItem extends React.Component {
     this.state = {
       createTodoText: this.props.createTodoText,
       createTodoPriority: this.props.createTodoPriority,
-      toggleDisplay: false
+      toggleDisplay: false,
+      completedTodo: false
     };
     this.handleChange = this.handleChange.bind(this);
-    this.handleEditDisplay= this.handleEditDisplay.bind(this);
+    this.handleEditDisplay = this.handleEditDisplay.bind(this);
+    this.handleCrossedOut = this.handleCrossedOut.bind(this);
   }
-  
+
   handleChange(e) {
     if (e.target.name === "createTodoText") {
       this.setState({ createTodoText: e.target.value });
@@ -22,38 +41,56 @@ class ListItem extends React.Component {
   }
   
   handleEditDisplay() {
-      this.setState({
-        toggleDisplay: !this.state.toggleDisplay
-      });
+    this.props.handleSave(
+      this.state.createTodoText,
+      this.state.createTodoPriority,
+      this.props.id,
+    );
+    this.setState({
+      toggleDisplay: !this.state.toggleDisplay
+    });
   };
-  
+
+  handleCrossedOut() {
+    this.setState({
+      completedTodo: !this.state.completedTodo
+    });
+  }
+
   render() {
     return(
       <div>
         <div 
-          className='list-group-item-success clearfix'
+          className={`list-group-item-${handlePriorityColor(this.state.createTodoPriority)} clearfix`}
         >
-          {this.props.createTodoText}
-          <button
-            className="list-group-item-danger pull-right"
-            onClick={() => this.props.handleDelete(this.props.id)}
+          <input 
+            type='checkbox'
+            style={{
+              marginleft: 10
+            }}
+            value={this.state.completedTodo}
+            onChange={ () => this.handleCrossedOut()}
+          />
+            <span style={{textDecoration: `${handleCompletedTodo(this.state.completedTodo)}`}}>{this.props.createTodoText}</span>
+            <button
+              className="list-group-item-danger pull-right"
+              onClick={() => this.props.handleDelete(this.props.id)}
+              >
+              <span className="glyphicon glyphicon-trash"/>
+            </button>
+
+            <button
+              className="list-group-item-success pull-right"
+              value={this.state.toggleDisplay}
+              onClick={() => this.handleEditDisplay()}
             >
-            <span className="glyphicon glyphicon-trash"/>
-          </button>
-
-          <button
-            className="list-group-item-success pull-right"
-            value={this.state.toggleDisplay}
-            onClick={() => this.handleEditDisplay()}
-          >
-            <span className="glyphicon glyphicon-edit"/>
-          </button>
-
+              <span className="glyphicon glyphicon-edit"/>
+            </button>
         </div>
 
-        {this.state.toggleDisplay ?
+        {this.state.toggleDisplay  ?
 
-          <div className='alert-success clearfix'>
+          <div className={`alert-${handlePriorityColor(this.state.createTodoPriority)} clearfix`}>
 
             <div className="form-group col-md-10">
               <label htmlFor="create-todo-text">
@@ -85,22 +122,16 @@ class ListItem extends React.Component {
               </select>
             </div>
 
+            
             <button
-              className="update-todo btn btn-success pull-right"
+              className="update-todo btn btn-success pull-right pull-bottom"
               style={{
                 marginRight: 20,
                 marginBottom: 10
               }}
               name="button"
               type="submit"
-              onClick={() =>
-                this.props.handleSave(
-                  this.state.createTodoText,
-                  this.state.createTodoPriority,
-                  this.props.id,
-                  this.toggleDisplay
-                )
-              }
+              onClick={() => this.handleEditDisplay()}
             >
               Save!
             </button>
@@ -108,8 +139,10 @@ class ListItem extends React.Component {
           </div>
 
           : null
-            
+          
         }
+            
+        
         
 
       </div>
