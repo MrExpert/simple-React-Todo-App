@@ -7,13 +7,13 @@ const ViewTodos = props => {
       <div className="card">
         <ul className="list-group">
           View Todos
-          {props.createTodoItems.map(newTodo => {
+          {props.todos.map(todo => {
             return (
               <ListItem
-                key={newTodo.id}
-                id={newTodo.id}
-                createTodoText={newTodo.createTodoText}
-                createTodoPriority={newTodo.createTodoPriority}
+                key={todo.id}
+                id={todo.id}
+                text={todo.text}
+                priority={todo.priority}
                 handleSave={props.handleSave}
                 handleDelete={props.handleDelete}
                 handleEditDisplay={props.handleEditDisplay}

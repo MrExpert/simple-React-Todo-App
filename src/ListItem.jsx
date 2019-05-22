@@ -22,8 +22,8 @@ class ListItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      createTodoText: this.props.createTodoText,
-      createTodoPriority: this.props.createTodoPriority,
+      createTodoText: this.props.text,
+      createTodoPriority: this.props.priority,
       toggleDisplay: false,
       completedTodo: false
     };
@@ -78,7 +78,7 @@ class ListItem extends React.Component {
               textDecoration: `${handleCompletedTodo(this.state.completedTodo)}`
             }}
           >
-            {this.props.createTodoText}
+            {this.state.createTodoText}
           </span>
           <a
             className="delete-todo list-group-item-danger pull-right"

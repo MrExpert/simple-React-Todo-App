@@ -1,23 +1,18 @@
 import React from "react";
 
-class AddTodosForm extends React.Component {
+class AddTodos extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      createTodoText: "",
-      createTodoPriority: ""
+      newText: "",
+      newPriority: "",
+      
     };
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(e) {
-    if (e.target.name === "createTodoText") {
-      this.setState({ createTodoText: e.target.value });
-    } else if (e.target.name === "createTodoPriority") {
-      this.setState({ createTodoPriority: e.target.value });
-    } else if (e.target.id === 0) {
-      this.setState({ id: e.target.value });
-    }
+    this.setState({ [e.target.name]: e.target.value });
   }
 
   render() {
@@ -29,10 +24,9 @@ class AddTodosForm extends React.Component {
           <label htmlFor="create-todo-text">I want to...</label>
           <textarea
             className="create-todo-text form-control"
-            name="createTodoText"
+            name="newText"
             type="string"
-            value={this.state.createTodoText}
-            onChange={this.handleChange}
+            onChange={ this.handleChange }
           />
         </div>
 
@@ -42,9 +36,8 @@ class AddTodosForm extends React.Component {
           </label>
           <select
             className="create-todo-priority form-control"
-            name="createTodoPriority"
-            value={this.state.createTodoPriority}
-            onChange={this.handleChange}
+            name="newPriority"
+            onChange={ this.handleChange }
           >
             <option>Select a priority</option>
             <option value="1">Low priority</option>
@@ -59,8 +52,8 @@ class AddTodosForm extends React.Component {
           type="submit"
           onClick={() =>
             this.props.handleAdd(
-              this.state.createTodoText,
-              this.state.createTodoPriority
+              this.state.newText,
+              this.state.newPriority,
             )
           }
         >
@@ -70,4 +63,4 @@ class AddTodosForm extends React.Component {
     );
   }
 }
-export default AddTodosForm;
+export default AddTodos;

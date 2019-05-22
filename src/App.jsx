@@ -1,49 +1,49 @@
 import React, { Component } from "react";
-import AddTodosForm from "./AddTodosForm";
+import AddTodos from "./AddTodos";
 import ViewTodos from "./ViewTodos";
-let id = 0;
 
 class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      createTodoItems: []
+      todos: []
     };
     this.handleAdd = this.handleAdd.bind(this);
     this.handleSave = this.handleSave.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
   }
 
-  handleAdd(createTodoText, createTodoPriority) {
-    let newTodo = {
-      createTodoText: createTodoText,
-      createTodoPriority: createTodoPriority,
-      id: id
-    };
-    id++;
-    this.state.createTodoItems.push(newTodo);
-    this.setState({
-      createTodoItems: this.state.createTodoItems
+  handleAdd(newText, newPriority, id ) {
+
+    this.state.todos.push({ text: newText, priority: newPriority, id: id
     });
+    id++;
+
+    this.setState({
+      text: newText,
+      priority: newPriority,
+      id: id
+    });
+    // this.setState({ todos:  });
   }
 
-  handleSave(createTodoText, createTodoPriority, id) {
-    let copyTodos = this.state.createTodoItems;
+  handleSave(newText, newPriority, newId) {
+    let copyTodos = this.state.todos;
     for (let i = 0; i < copyTodos.length; i++) {
-      if (copyTodos[i].id == id) {
-        copyTodos[i].createTodoText = createTodoText;
-        copyTodos[i].createTodoPriority = createTodoPriority;
+      if (copyTodos[i].newId == newId) {
+        copyTodos[i].newText = newText;
+        copyTodos[i].newPriority = newPriority;
       }
     }
-    this.setState({ createTodoitems: copyTodos });
+    this.setState({ todos: copyTodos });
   }
 
   handleDelete(id) {
-    let remainingTodos = this.state.createTodoItems.filter(deletedTodo => {
+    let remainingTodos = this.state.todos.filter(deletedTodo => {
       if (deletedTodo.id !== id) return deletedTodo;
     });
     this.setState({
-      createTodoItems: remainingTodos
+      todos: remainingTodos
     });
   }
 
@@ -58,17 +58,11 @@ class App extends Component {
         </div>
 
         <div className="row">
-          <AddTodosForm handleAdd={this.handleAdd} />
+          <AddTodos handleAdd={ this.handleAdd } />
           <ViewTodos
-            createTodoItems={this.state.createTodoItems}
-            createTodoText={this.state.createTodoText}
-            createTodoPriority={this.state.createTodoPriority}
-            completedTodo={this.state.completedTodo}
-            toggleDisplay={this.state.toggleDisplay}
-            handleSave={this.handleSave}
-            handleDelete={this.handleDelete}
-            handleEditDisplay={this.handleEditDisplay}
-            handleCrossedOut={this.handleCrossedOut}
+            todos={ this.state.todos }
+            handleSave={ this.handleSave }
+            handleDelete={ this.handleDelete }
           />
         </div>
       </div>
